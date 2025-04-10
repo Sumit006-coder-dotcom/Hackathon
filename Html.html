@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            background-image: url(https://m.economictimes.com/thumb/msid-74960608,width-1600,height-900,resizemode-4,imgsize-49172/upi-twitter.jpg);
+            background-size:contain ;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            display: none;
+        }
+        .fraud {
+            background-color: #ffdddd;
+            border-left: 6px solid #f44336;
+        }
+        .not-fraud {
+            background-color: #ddffdd;
+            border-left: 6px solid #4CAF50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fraud Detection System</h1>
+    
+    <div class="form-container">
+        <div class="form-group">
+            <label for="transaction_id">Transaction ID:</label>
+            <input type="text" id="transaction_id" placeholder="Enter transaction ID">
+        </div>
+        
+        <div class="form-group">
+            <label for="timestamp">Timestamp:</label>
+            <input type="datetime-local" id="timestamp">
+        </div>
+        
+        <div class="form-group">
+            <label for="sender">Sender:</label>
+            <input type="text" id="sender" placeholder="Enter sender ID">
+        </div>
+        
+        <div class="form-group">
+            <label for="receiver">Receiver:</label>
+            <input type="text" id="receiver" placeholder="Enter receiver ID">
+        </div>
+        
+        <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" placeholder="Enter amount" step="0.01">
+        </div>
+        
+        <div class="form-group">
+            <label for="currency">Currency:</label>
+            <select id="currency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="INR">INR</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" id="location" placeholder="Enter location">
+        </div>
+        
+        <button onclick="predictFraud()">Check for Fraud</button>
+        
+        <div id="result"></div>
+    </div>
+    
+    <h2>Recent Transactions</h2>
+    <table id="transactions-table">
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Timestamp</th>
+                <th>Sender</th>
+                <th>Receiver</th>
+                <th>Amount</th>
+                <th>Currency</th>
+                <th>Location</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="transactions-body">
+            <!-- Transactions will be loaded here -->
+        </tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
